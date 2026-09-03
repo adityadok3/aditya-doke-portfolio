@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="unstopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="#0D1527"/>
+  <!-- Unstop Modern U Symbol -->
+  <path d="M 28 26 L 42 26 L 42 54 C 42 61 45 65 50 65 C 55 65 58 61 58 54 L 58 26 L 72 26 L 72 54 C 72 72 61 80 50 80 C 39 80 28 72 28 54 Z" fill="url(#unstopGrad)"/>
+  <circle cx="72" cy="26" r="5" fill="#00E5FF"/>
+</svg>
