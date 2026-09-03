@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Send, MessageSquare, CheckCircle } from 'lucide-react';
+import { Mail, Phone, Send, MessageSquare, CheckCircle, AlertCircle } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { PERSONAL_INFO } from '../data/portfolioData';
+
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+};
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -14,13 +21,29 @@ export const ContactSection: React.FC = () => {
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSending(true);
-    // Simulate frontend form submission handler
-    setTimeout(() => {
-      setIsSending(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 800);
+    setErrorMessage('');
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact',
+        ...formData,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+        setIsSending(false);
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      })
+      .catch(() => {
+        setIsSending(false);
+        setErrorMessage('Failed to send message. Please try again.');
+      });
   };
 
   return (
@@ -151,7 +174,25 @@ export const ContactSection: React.FC = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              {errorMessage && (
+                <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center gap-3 text-red-400 text-sm">
+                  <AlertCircle className="w-5 h-5 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+                {/* Netlify Form Hidden Fields */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
+
                 <div>
                   <label htmlFor="name" className="block text-xs font-mono text-[#94A3B8] mb-2">
                     YOUR NAME
@@ -159,6 +200,7 @@ export const ContactSection: React.FC = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -174,6 +216,7 @@ export const ContactSection: React.FC = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -188,6 +231,7 @@ export const ContactSection: React.FC = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={4}
                     value={formData.message}
