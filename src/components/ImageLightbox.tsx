@@ -134,7 +134,7 @@ export const ImageLightbox: React.FC<LightboxProps> = ({
   return createPortal(
     <AnimatePresence>
       {isOpen && currentItem && (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 lg:p-10 select-none w-screen h-screen overflow-hidden pointer-events-auto">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 lg:p-10 select-none w-full h-full overflow-hidden pointer-events-auto">
           {/* Dark Blurred Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}

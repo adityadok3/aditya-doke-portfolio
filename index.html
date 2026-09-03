@@ -25,9 +25,9 @@
   </head>
   <body class="bg-[#0A0F1C] text-[#F8FAFC] selection:bg-[#00E5FF]/30 selection:text-[#00E5FF] font-sans antialiased overflow-x-hidden">
     <!-- Static Netlify Form Detection for React SPA -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden aria-hidden="true">
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" action="/" hidden aria-hidden="true">
       <input type="hidden" name="form-name" value="contact" />
-      <input type="hidden" name="bot-field" />
+      <input type="text" name="bot-field" style="display:none" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>

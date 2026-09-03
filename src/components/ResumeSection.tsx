@@ -77,12 +77,18 @@ export const ResumeSection: React.FC = () => {
           className="max-w-5xl mx-auto"
         >
           <div className="glass-panel rounded-3xl p-2 sm:p-4 border border-[#1E293B] shadow-[0_0_40px_rgba(0,229,255,0.08)] relative overflow-hidden bg-[#0A0F1C]">
-            <div className="w-full h-[550px] sm:h-[700px] lg:h-[820px] rounded-2xl overflow-hidden bg-[#111827]">
-              <iframe
-                src={`${resumeUrl}#toolbar=1`}
-                title="Aditya Doke Resume PDF Viewer"
-                className="w-full h-full border-0 rounded-2xl"
-              />
+            <div className="w-full h-[500px] sm:h-[700px] lg:h-[820px] rounded-2xl overflow-hidden bg-[#111827]">
+              <object
+                data={`${resumeUrl}#toolbar=1`}
+                type="application/pdf"
+                className="w-full h-full rounded-2xl border-0"
+              >
+                <iframe
+                  src={`${resumeUrl}#toolbar=1`}
+                  title="Aditya Doke Resume PDF Viewer"
+                  className="w-full h-full border-0 rounded-2xl"
+                />
+              </object>
             </div>
           </div>
 

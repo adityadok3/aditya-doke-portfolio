@@ -4,32 +4,27 @@ import { Mail, Phone, Send, MessageSquare, CheckCircle, AlertCircle } from 'luci
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
-const encode = (data: Record<string, string>) => {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
-};
-
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [botField, setBotField] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSending(true);
     setErrorMessage('');
 
+    const formElement = e.currentTarget;
+    const data = new FormData(formElement);
+
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({
-        'form-name': 'contact',
-        ...formData,
-      }),
+      body: new URLSearchParams(data as any).toString(),
     })
       .then((response) => {
         if (!response.ok) {
@@ -38,6 +33,7 @@ export const ContactSection: React.FC = () => {
         setIsSending(false);
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
+        setBotField('');
         setTimeout(() => setSubmitted(false), 5000);
       })
       .catch(() => {
@@ -184,14 +180,23 @@ export const ContactSection: React.FC = () => {
               <form
                 name="contact"
                 method="POST"
+                action="/"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
                 className="space-y-5"
               >
-                {/* Netlify Form Hidden Fields */}
+                {/* Netlify Form Hidden & Honeypot Fields */}
                 <input type="hidden" name="form-name" value="contact" />
-                <input type="hidden" name="bot-field" />
+                <input
+                  type="text"
+                  name="bot-field"
+                  value={botField}
+                  onChange={(e) => setBotField(e.target.value)}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
 
                 <div>
                   <label htmlFor="name" className="block text-xs font-mono text-[#94A3B8] mb-2">
