@@ -4,8 +4,8 @@ export const BackgroundGrid: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Dark Ambient Gradients */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#00E5FF]/5 rounded-full blur-[140px]" />
-      <div className="absolute bottom-1/3 right-1/4 w-[700px] h-[700px] bg-[#7C3AED]/5 rounded-full blur-[160px]" />
+      <div className="absolute top-0 left-1/4 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-[#00E5FF]/5 rounded-full blur-[70px] sm:blur-[140px]" />
+      <div className="absolute bottom-1/3 right-1/4 w-[350px] h-[350px] sm:w-[700px] sm:h-[700px] bg-[#7C3AED]/5 rounded-full blur-[80px] sm:blur-[160px]" />
       
       {/* Subtle Engineering Grid */}
       <div className="absolute inset-0 bg-tech-grid opacity-30" />

@@ -86,6 +86,7 @@ export const ResumeSection: React.FC = () => {
                 <iframe
                   src={`${resumeUrl}#toolbar=1`}
                   title="Aditya Doke Resume PDF Viewer"
+                  loading="lazy"
                   className="w-full h-full border-0 rounded-2xl"
                 />
               </object>

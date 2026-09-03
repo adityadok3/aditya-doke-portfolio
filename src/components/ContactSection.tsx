@@ -11,35 +11,43 @@ export const ContactSection: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSending(true);
     setErrorMessage('');
 
-    const formElement = e.currentTarget;
-    const data = new FormData(formElement);
+    try {
+      const formElement = e.currentTarget;
+      const formDataObj = new FormData(formElement);
+      const encodedData = new URLSearchParams();
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data as any).toString(),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Form submission failed');
-        }
-        setIsSending(false);
+      formDataObj.forEach((value, key) => {
+        encodedData.append(key, value.toString());
+      });
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encodedData.toString(),
+      });
+
+      setIsSending(false);
+
+      if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
         setBotField('');
-        setTimeout(() => setSubmitted(false), 5000);
-      })
-      .catch(() => {
-        setIsSending(false);
+      } else {
         setErrorMessage('Failed to send message. Please try again.');
-      });
+      }
+    } catch {
+      setIsSending(false);
+      setErrorMessage('Failed to send message. Please try again.');
+    }
   };
 
   return (

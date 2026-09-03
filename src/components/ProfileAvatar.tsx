@@ -39,6 +39,10 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
             <img
               src={imageSrc}
               alt={altText}
+              width={256}
+              height={256}
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover rounded-full relative z-10"
             />
           ) : (

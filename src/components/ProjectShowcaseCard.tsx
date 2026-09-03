@@ -99,6 +99,10 @@ export const ProjectShowcaseCard: React.FC<ProjectShowcaseCardProps> = ({ projec
                 <img
                   src={screenshots[0].src}
                   alt={screenshots[0].label}
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={340}
                   className="w-full h-full object-contain p-1 group-hover/frame:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C]/80 via-transparent to-transparent opacity-0 group-hover/frame:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3 pointer-events-none">

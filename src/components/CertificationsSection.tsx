@@ -49,6 +49,10 @@ export const CertificationsSection: React.FC = () => {
                       <img
                         src={cert.logoUrl}
                         alt={`${cert.issuer} logo`}
+                        loading="lazy"
+                        decoding="async"
+                        width={52}
+                        height={52}
                         className="w-full h-full object-contain"
                       />
                     </div>

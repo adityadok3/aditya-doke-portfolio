@@ -108,6 +108,10 @@ export const EducationSection: React.FC = () => {
                             <img
                               src={item.logoUrl}
                               alt={`${item.institution} logo`}
+                              loading="lazy"
+                              decoding="async"
+                              width={40}
+                              height={40}
                               className="w-full h-full object-contain"
                             />
                           </div>

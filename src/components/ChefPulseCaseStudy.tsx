@@ -75,6 +75,10 @@ export const ChefPulseCaseStudy: React.FC = () => {
                   <img
                     src={screenshots[0].src}
                     alt={screenshots[0].label}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={450}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
@@ -100,6 +104,10 @@ export const ChefPulseCaseStudy: React.FC = () => {
                     <img
                       src={screenshots[1].src}
                       alt={screenshots[1].label}
+                      loading="lazy"
+                      decoding="async"
+                      width={400}
+                      height={300}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : null}
@@ -121,6 +129,10 @@ export const ChefPulseCaseStudy: React.FC = () => {
                     <img
                       src={screenshots[2].src}
                       alt={screenshots[2].label}
+                      loading="lazy"
+                      decoding="async"
+                      width={400}
+                      height={300}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : null}

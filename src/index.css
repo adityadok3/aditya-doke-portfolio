@@ -139,6 +139,33 @@
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  .animate-pulse-glow {
+    /* Avoid expensive GPU drop-shadow re-rasterization on mobile */
+    animation: opacity-pulse 4s ease-in-out infinite;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .glass-navbar {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes opacity-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
