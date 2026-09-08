@@ -200,7 +200,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     issuer: 'Unstop',
     logoUrl: '/certificates/unstop-logo.svg',
     certificateUrl: '/certificates/css-with-ai.pdf',
-    verificationUrl: 'https://unstop.com/api/course/certificate/43651b89-3b02-4168-b684-7e10590a4b69/view',
+    verificationUrl: 'https://unstop.com/api/course/certificate/08b4d6b0-7e15-4cde-ac94-2608cf56e484/view',
   },
   {
     id: 'nodejs',
@@ -208,7 +208,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     issuer: 'Unstop',
     logoUrl: '/certificates/unstop-logo.svg',
     certificateUrl: '/certificates/nodejs.pdf',
-    verificationUrl: 'https://unstop.com/api/course/certificate/08b4d6b0-7e15-4cde-ac94-2608cf56e484/view',
+    verificationUrl: 'https://unstop.com/api/course/certificate/43651b89-3b02-4168-b684-7e10590a4b69/view',
   },
   {
     id: 'advanced-software-engineering',
